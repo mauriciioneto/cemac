@@ -1,0 +1,402 @@
+/* Reset e Estrutura Principal */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", Arial, sans-serif;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.smac-app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* --- HEADER (Topo) --- */
+.smac-header {
+  height: 50px;
+  background-color: #2b78d1;
+  /* Azul corporativo Climatempo SMAC */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 13px; /* Espaçamento interno para formar o quadrado */
+  margin-left: -15px; /* Encostar na borda esquerda */
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.menu-btn.active {
+  background-color: rgba(0, 0, 0, 0.2); /* Mais escuro que o header para indicar ativo */
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo-icon {
+  color: #e53935;
+  /* Vermelho do radar */
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 13px;
+}
+
+.header-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.header-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 10px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  min-width: 150px;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eaeaea;
+  background-color: #f9f9f9;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-close:hover {
+  color: #c53030;
+}
+
+.modal-body {
+  padding: 20px;
+  color: #444;
+  font-size: 14px;
+}
+
+.modal-body p {
+  margin: 10px 0;
+}
+
+.alert-badge {
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.logout-btn {
+  background-color: #d32f2f;
+  border: none;
+  color: white;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: -15px;
+  /* Colar na borda */
+}
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
+
+/* --- CORPO (Mapa + Sidebar) --- */
+.smac-body {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 50px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- MAP AREA --- */
+.map-container {
+  flex: 1;
+  position: relative;
+  background: #e0e0e0;
+}
+
+.windy-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+/* Camada Transparente do GeoJSON */
+.geojson-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  /* Agora permite que o clique passe direto para o Iframe do Windy */
+  pointer-events: none;
+}
+
+/* --- SIDEBAR DIREITA --- */
+.right-sidebar {
+  width: 280px;
+  background-color: rgba(43, 43, 43, 0.85); /* Transparente igual o original */
+  backdrop-filter: blur(2px); /* Efeito opcional de desfoque sutil, fica bem legal */
+  color: #ddd;
+  overflow-y: auto;
+  border-left: 1px solid rgba(26, 26, 26, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.sidebar-section {
+  border-bottom: 1px solid #444;
+}
+
+.sidebar-title {
+  padding: 12px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  background: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.sidebar-title input[type="checkbox"] {
+  accent-color: #00bcd4;
+}
+
+.layer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo mais escuro para os itens (camadas) */
+}
+
+.layer-item {
+  padding: 10px 15px 10px 35px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #ddd;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Linha divisória sutil entre as camadas */
+}
+
+.layer-item:last-child {
+  border-bottom: none;
+}
+
+.layer-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.layer-item.active {
+  color: white;
+}
+
+/* Estilização customizada dos Checkboxes igual ao SMAC */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #00bcd4; /* Azul ciano */
+}
+
+/* O "V" de check (marca de seleção escura) */
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white; /* Cor branca do V */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Slider de transparencia fake do Radar */
+.transparency-slider {
+  padding: 10px 15px 15px 35px;
+  font-size: 11px;
+  color: #aaa;
+}
+
+.transparency-slider input[type="range"] {
+  width: 100%;
+  margin-top: 5px;
+  accent-color: #00bcd4;
+}
+
+/* Custom Scrollbar com setinhas e melhor contraste */
+::-webkit-scrollbar {
+  width: 14px; /* Barra mais larga */
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff; /* Fundo branco para dar mais contraste */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888888; /* Barra bem mais escura para destacar melhor */
+  border-radius: 0; /* Totalmente quadrada */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555555; /* Ainda mais escura no hover */
+}
+
+/* Botões da scrollbar (Setinhas) */
+::-webkit-scrollbar-button:single-button {
+  background-color: #ffffff;
+  display: block;
+  height: 14px;
+  width: 14px;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(100, 100, 100)'><polygon points='50,20 10,80 90,80'/></svg>");
+  background-size: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='rgb(100, 100, 100)'><polygon points='10,20 90,20 50,80'/></svg>");
+  background-size: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
