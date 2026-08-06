@@ -8,11 +8,13 @@ const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'))
 
 // Pega o hash curto do último commit git (fallback se não tiver git)
 let gitHash = 'dev'
+let commitCount = 0
 try {
   gitHash = execSync('git rev-parse --short HEAD').toString().trim()
+  commitCount = parseInt(execSync('git rev-list --count HEAD').toString().trim(), 10)
 } catch (e) {}
 
-const appVersion = `v${pkg.version} (${gitHash})`
+const appVersion = `v0.1.${commitCount}`
 
 // https://vitejs.dev/config/
 export default defineConfig({
