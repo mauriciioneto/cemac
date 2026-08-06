@@ -33,13 +33,16 @@ function App() {
     const fetchAlerts = async () => {
       try {
         const res = await fetch('/api-prevmet/avisos/ativos');
+        if (!res.ok || !res.headers.get('content-type')?.includes('application/json')) {
+          // API indisponível ou CORS bloqueado (ex: Cloudflare Pages) — falha silenciosa
+          return;
+        }
         const data = await res.json();
-        // INMET returns { hoje: [...], futuro: [...] }
         if (data && data.hoje) {
           setInmetAlerts(data.hoje);
         }
       } catch (err) {
-        console.error("Error fetching INMET alerts:", err);
+        // Suprime erro de CORS/rede silenciosamente
       }
     };
     
