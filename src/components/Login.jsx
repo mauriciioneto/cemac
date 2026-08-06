@@ -101,8 +101,22 @@ const Login = ({ onLogin }) => {
           </form>
         </div>
       </div>
+      <span style={{
+        position: 'fixed',
+        bottom: '10px',
+        right: '14px',
+        fontSize: '11px',
+        color: 'rgba(255,255,255,0.5)',
+        fontFamily: 'monospace',
+        letterSpacing: '0.5px',
+        pointerEvents: 'none',
+        userSelect: 'none'
+      }}>
+        {__APP_VERSION__}
+      </span>
     </div>
   );
 };
 
+/* eslint-disable no-undef */
 export default Login;
