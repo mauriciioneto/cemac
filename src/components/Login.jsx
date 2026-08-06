@@ -83,6 +83,7 @@ const Login = ({ onLogin }) => {
                 placeholder="Senha" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
                 required
               />
               <button 

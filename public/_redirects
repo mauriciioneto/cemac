@@ -1,0 +1,3 @@
+/api-inmet/* https://apitempo.inmet.gov.br/:splat 200
+/api-prevmet/* https://apiprevmet3.inmet.gov.br/:splat 200
+/api-nowcastsig/* https://nowcastsig.funceme.br/:splat 200
