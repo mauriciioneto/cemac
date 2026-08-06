@@ -14,7 +14,8 @@ try {
   commitCount = parseInt(execSync('git rev-list --count HEAD').toString().trim(), 10)
 } catch (e) {}
 
-const appVersion = `v0.1.${commitCount}`
+const BASE_DEPLOY_OFFSET = 9 // deploys feitos antes do git init
+const appVersion = `v0.1.${commitCount + BASE_DEPLOY_OFFSET}`
 
 // https://vitejs.dev/config/
 export default defineConfig({
